@@ -11,6 +11,16 @@ variable "resourcegroup_name" {
   
 }
 
+
+/*
+variable "resourcegroup_name" {
+  type        = list
+  description = "resource group name"
+  default     = ["HUB-resource-group","Spoke2-resource-group"]
+
+}
+*/
+
 variable "location" {
     type = string
     description = "azure region"
@@ -76,3 +86,51 @@ variable "sku_name" {
     default = "AZFW_VNet"
   
 }
+
+// Spoke Variables 
+
+variable "resourcegroup_spokename2" {
+    type = string
+    description = "spoke2 resource group name"
+    default = "SPOKE2-resource-group"
+  
+}
+
+variable "vnet_name_spoke2" {
+    type = string
+    description = " spoke2 virtual network name"
+    default = "SPOKE2-vnet"
+}
+
+variable "spoke2_address_space" {
+    type = list(string)
+    description = "spoke2 vnet cidr for spoke2"
+    default = ["10.2.0.0/16"]
+
+}
+
+variable "subnet_name1_spoke2" {
+    type = string
+    description = "subnet name"
+    default = "spoke2-subnet1"
+}
+
+variable "subnet1_prefix_spoke2" {
+    type = string
+    description = "subnet1 cidr for spoke2"
+    default = "10.2.0.0/26"
+}
+
+variable "spoke2_subnet2_name" {
+    type = string
+    description = "subnet name"
+    default = "spoke2-subnet2"
+
+}
+
+variable "subnet2_prefix_spoke2" {
+    type = string
+    description = "subnet2 cidr for spoke2"
+    default = "10.2.0.0/24"
+}
+
