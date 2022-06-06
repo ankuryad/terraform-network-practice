@@ -105,7 +105,7 @@ variable "vnet_name_spoke2" {
 variable "spoke2_address_space" {
     type = list(string)
     description = "spoke2 vnet cidr for spoke2"
-    default = ["10.2.0.0/16"]
+    default = "10.2.0.0/16"
 
 }
 
