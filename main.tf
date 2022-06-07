@@ -75,7 +75,7 @@ resource "azurerm_virtual_network" "spoke2_vnet" {
 }
 
 resource "azurerm_subnet" "spoke2_subnet1" {
-    name                 = var.subnet_name1_spoke2
+    name                 = var.spoke2_subnet1_name
     resource_group_name  = azurerm_resource_group.rgs2.name
     virtual_network_name = azurerm_virtual_network.spoke2_vnet.name
     address_prefixes     = [var.subnet1_prefix_spoke2]
@@ -88,3 +88,61 @@ resource "azurerm_subnet" "spoke2_subnet2" {
     address_prefixes     = [var.subnet2_prefix_spoke2]
 }
 
+/*
+
+data "azurerm_firewall" "firewall_data" {
+  name                = var.hub_firewall
+  resource_group_name = var.resourcegroup_name
+}
+
+
+output "firewall_private_ip" {
+ // value = data.azurerm_firewall.firewall_data.hub_firewall.ip_configuration[0].private_ip_address
+ value = data.azurerm_firewall.firewall_data.ip_configuration[0].private_ip_address
+}
+
+
+
+resource "azurerm_route_table" "spoke2_route_table" {
+  name                          = var.spoke2_route_table_name
+  location                      = azurerm_resource_group.rgs2.location
+  resource_group_name           = azurerm_resource_group.rgs2.name
+  
+  route {
+    name           = "route-hub"
+    address_prefix = data.azurerm_firewall.firewall_data.outputs.firewall_private_ip
+  //  address_prefix = "10.0.0.0/16"
+    next_hop_type  = "VnetLocal"
+  }
+
+  tags = {
+    environment = var.env
+  }
+}
+
+
+resource "azurerm_subnet_route_table_association" "subnet_route_map1" {
+  subnet_id      = azurerm_subnet.spoke2_subnet1.id
+  route_table_id = azurerm_route_table.spoke2_route_table.id
+}
+
+resource "azurerm_subnet_route_table_association" "subnet_route_map2" {
+  subnet_id      = "${azurerm_subnet.spoke2_subnet2.id}"
+  route_table_id = "${azurerm_route_table.spoke2_route_table.id}"
+}
+
+resource "azurerm_virtual_network_peering" "spoke2-hub" {
+  name                      = "spoke2hub"
+  resource_group_name       = azurerm_resource_group.rgs2.name
+  virtual_network_name      = azurerm_virtual_network.spoke2_vnet.name
+  remote_virtual_network_id = azurerm_virtual_network.hub_vnet.id
+}
+
+resource "azurerm_virtual_network_peering" "hub-spoke2" {
+  name                      = "hubspoke2"
+  resource_group_name       = azurerm_resource_group.rg.name
+  virtual_network_name      = azurerm_virtual_network.hub_vnet.name
+  remote_virtual_network_id = azurerm_virtual_network.spoke2_vnet.id
+}
+
+*/

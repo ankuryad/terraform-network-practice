@@ -103,13 +103,13 @@ variable "vnet_name_spoke2" {
 }
 
 variable "spoke2_address_space" {
-    type = list(string)
+ //   type = list(string)
     description = "spoke2 vnet cidr for spoke2"
     default = "10.2.0.0/16"
 
 }
 
-variable "subnet_name1_spoke2" {
+variable "spoke2_subnet1_name" {
     type = string
     description = "subnet name"
     default = "spoke2-subnet1"
@@ -118,7 +118,7 @@ variable "subnet_name1_spoke2" {
 variable "subnet1_prefix_spoke2" {
     type = string
     description = "subnet1 cidr for spoke2"
-    default = "10.2.0.0/26"
+    default = "10.2.16.0/24"
 }
 
 variable "spoke2_subnet2_name" {
@@ -131,6 +131,11 @@ variable "spoke2_subnet2_name" {
 variable "subnet2_prefix_spoke2" {
     type = string
     description = "subnet2 cidr for spoke2"
-    default = "10.2.0.0/24"
+    default = "10.2.0.0/20"
 }
 
+variable "spoke2_route_table_name" {
+    type = string
+    description = "route table for spoke2"
+    default = "spoke2-route-table"
+}
