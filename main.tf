@@ -115,8 +115,9 @@ resource "azurerm_route_table" "spoke2_route_table" {
     name           = "route-hub"
   //  address_prefix = data.azurerm_firewall.firewall_data.outputs.firewall_private_ip
   //  address_prefix = "10.0.0.0/16"
-    address_prefix = "data.azurerm_firewall.firewall_data.ip_configuration[0].private_ip_address"
-    next_hop_type  = "VnetLocal"
+    address_prefix = "0.0.0.0/0"
+    next_hop_type  = "VirtualAppliance"
+    next_hop_in_ip_address = data.azurerm_firewall.firewall_data.ip_configuration[0].private_ip_address
   }
 
   tags = {
