@@ -88,20 +88,20 @@ resource "azurerm_subnet" "spoke2_subnet2" {
     address_prefixes     = [var.subnet2_prefix_spoke2]
 }
 
-/*
+
 
 data "azurerm_firewall" "firewall_data" {
   name                = var.hub_firewall
   resource_group_name = var.resourcegroup_name
 }
 
-
+/*
 output "firewall_private_ip" {
  // value = data.azurerm_firewall.firewall_data.hub_firewall.ip_configuration[0].private_ip_address
  value = data.azurerm_firewall.firewall_data.ip_configuration[0].private_ip_address
 }
 
-
+*/
 
 resource "azurerm_route_table" "spoke2_route_table" {
   name                          = var.spoke2_route_table_name
@@ -127,8 +127,8 @@ resource "azurerm_subnet_route_table_association" "subnet_route_map1" {
 }
 
 resource "azurerm_subnet_route_table_association" "subnet_route_map2" {
-  subnet_id      = "${azurerm_subnet.spoke2_subnet2.id}"
-  route_table_id = "${azurerm_route_table.spoke2_route_table.id}"
+  subnet_id      = azurerm_subnet.spoke2_subnet2.id
+  route_table_id = azurerm_route_table.spoke2_route_table.id
 }
 
 resource "azurerm_virtual_network_peering" "spoke2-hub" {
@@ -145,4 +145,4 @@ resource "azurerm_virtual_network_peering" "hub-spoke2" {
   remote_virtual_network_id = azurerm_virtual_network.spoke2_vnet.id
 }
 
-*/
+

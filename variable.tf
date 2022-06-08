@@ -109,6 +109,21 @@ variable "spoke2_address_space" {
 
 }
 
+/*
+variable "spoke2_subnet1_name" {
+    type = string
+    description = "subnet name"
+    default = ["spoke2-subnet1","spoke2-subnet2"]
+}
+
+variable "subnet1_prefix_spoke2" {
+    type = string
+    description = "subnet1 cidr for spoke2"
+    default = ["10.2.16.0/24","10.2.0.0/20"]
+}
+
+*/
+
 variable "spoke2_subnet1_name" {
     type = string
     description = "subnet name"
