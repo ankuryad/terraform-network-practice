@@ -74,12 +74,29 @@ resource "azurerm_virtual_network" "spoke2_vnet" {
 
 }
 
+
+resource "azurerm_subnet" "spoke2_subnet1" {
+    count = "${length(var.spoke2_subnet1_name)}"
+    //count = var.counter
+    name = "${lookup(element(var.spoke2_subnet1_name, count.index), "name")}"
+    resource_group_name = azurerm_resource_group.rgs2.name
+    virtual_network_name = azurerm_virtual_network.spoke2_vnet.name
+    address_prefixes = [lookup(element(var.spoke2_subnet1_name, count.index), "ip")]
+    //address_prefixes = "${lookup(element(var.spoke2_subnet1_name, count.index), "ip")}"
+    //address_prefixes = "${lookup(element(var.subnet1_prefix_spoke2, count.index), "ip")}"
+}
+
+
+
+/* - dummy code
 resource "azurerm_subnet" "spoke2_subnet1" {
     name                 = var.spoke2_subnet1_name
     resource_group_name  = azurerm_resource_group.rgs2.name
     virtual_network_name = azurerm_virtual_network.spoke2_vnet.name
     address_prefixes     = [var.subnet1_prefix_spoke2]
 }
+
+
 
 resource "azurerm_subnet" "spoke2_subnet2" {
     name                 = var.spoke2_subnet2_name
@@ -88,14 +105,16 @@ resource "azurerm_subnet" "spoke2_subnet2" {
     address_prefixes     = [var.subnet2_prefix_spoke2]
 }
 
+*/
+
 
 
 data "azurerm_firewall" "firewall_data" {
   name                = var.hub_firewall
-  resource_group_name = var.resourcegroup_name
+  resource_group_name = azurerm_resource_group.rg.name
 }
 
-/*
+/* dummy code
 
 output "firewall_private_ip" {
  // value = data.azurerm_firewall.firewall_data.hub_firewall.ip_configuration[0].private_ip_address
@@ -106,6 +125,7 @@ output "firewall_private_ip" {
 
 
 
+
 resource "azurerm_route_table" "spoke2_route_table" {
   name                          = var.spoke2_route_table_name
   location                      = azurerm_resource_group.rgs2.location
@@ -113,7 +133,7 @@ resource "azurerm_route_table" "spoke2_route_table" {
   
   route {
     name           = "route-hub"
-  //  address_prefix = data.azurerm_firewall.firewall_data.outputs.firewall_private_ip
+  //  next_hop_in_ip_address = data.azurerm_firewall.firewall_data.outputs.firewall_private_ip
   //  address_prefix = "10.0.0.0/16"
     address_prefix = "0.0.0.0/0"
     next_hop_type  = "VirtualAppliance"
@@ -127,6 +147,25 @@ resource "azurerm_route_table" "spoke2_route_table" {
 
 
 resource "azurerm_subnet_route_table_association" "subnet_route_map1" {
+  count = "${length(var.spoke2_subnet1_name)}"
+ // subnet_id      = "${azurerm_subnet.spoke2_subnet1[count.index].id}"
+  subnet_id      = azurerm_subnet.spoke2_subnet1[count.index].id
+  route_table_id = azurerm_route_table.spoke2_route_table.id
+}
+
+/*
+resource "azurerm_subnet_route_table_association" "subnet_route_map2" {
+  count = "${length(var.spoke2_subnet1_name)}"
+  //subnet_id      = "${azurerm_subnet.spoke2_subnet1[count.index].id}"
+  subnet_id      = azurerm_subnet.spoke2_subnet1[count.index].id
+  route_table_id = azurerm_route_table.spoke2_route_table.id
+}
+
+*/
+
+/* dummy code
+
+resource "azurerm_subnet_route_table_association" "subnet_route_map1" {
   subnet_id      = azurerm_subnet.spoke2_subnet1.id
   route_table_id = azurerm_route_table.spoke2_route_table.id
 }
@@ -135,6 +174,10 @@ resource "azurerm_subnet_route_table_association" "subnet_route_map2" {
   subnet_id      = azurerm_subnet.spoke2_subnet2.id
   route_table_id = azurerm_route_table.spoke2_route_table.id
 }
+
+*/
+
+
 
 resource "azurerm_virtual_network_peering" "spoke2-hub" {
   name                      = "spoke2hub"
@@ -149,5 +192,7 @@ resource "azurerm_virtual_network_peering" "hub-spoke2" {
   virtual_network_name      = azurerm_virtual_network.hub_vnet.name
   remote_virtual_network_id = azurerm_virtual_network.spoke2_vnet.id
 }
+
+ 
 
 
