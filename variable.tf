@@ -1,14 +1,14 @@
 //variable "seal_id" {
 //    type = string
 //    description = "SEAL ID"
-  
+
 //}
 
 variable "resourcegroup_name" {
-    type = string
-    description = "resource group name"
-    default = "HUB-resource-group"
-  
+  type        = string
+  description = "resource group name"
+  default     = "HUB-resource-group"
+
 }
 
 
@@ -22,109 +22,109 @@ variable "resourcegroup_name" {
 */
 
 variable "location" {
-    type = string
-    description = "azure region"
-    default = "westus2"  
+  type        = string
+  description = "azure region"
+  default     = "westus2"
 }
 
 variable "vnet_name" {
-    type = string
-    description = "virtual network name"
-    default = "HUB-vnet"
+  type        = string
+  description = "virtual network name"
+  default     = "HUB-vnet"
 }
 
 variable "address_space" {
-    type = list(string)
-    description = "vnet cidr"
-    default = ["10.0.0.0/16"]
+  type        = list(string)
+  description = "vnet cidr"
+  default     = ["10.0.0.0/16"]
 
 }
 
 variable "subnet_name" {
-    type = string
-    description = "subnet name"
-    default = "AzureFirewallSubnet"
+  type        = string
+  description = "subnet name"
+  default     = "AzureFirewallSubnet"
 
 }
 
 variable "subnet_prefix" {
-    type = string
-    description = "subnet cidr"
-    default = "10.0.0.0/26"
+  type        = string
+  description = "subnet cidr"
+  default     = "10.0.0.0/26"
 }
 
 variable "env" {
-    type = string
-    description = "environment"
-    default = "dev"
-  
+  type        = string
+  description = "environment"
+  default     = "dev"
+
 }
 
 variable "firewall_ip" {
-    type = string
-    description = "firewall staic ip" 
-    default = "firewallpip"
+  type        = string
+  description = "firewall staic ip"
+  default     = "firewallpip"
 
 }
 
 variable "hub_firewall" {
-    type = string
-    description = "firewall name"
-    default = "Hub-vnet-firewall"
-  
+  type        = string
+  description = "firewall name"
+  default     = "Hub-vnet-firewall"
+
 }
 
 variable "sku_tier" {
-    type = string
-    description = "firewall sku standard or premium"
-    default = "Premium"
+  type        = string
+  description = "firewall sku standard or premium"
+  default     = "Premium"
 }
 
 variable "sku_name" {
-    type = string
-    description = "firewall sku name"
-    default = "AZFW_VNet"
-  
+  type        = string
+  description = "firewall sku name"
+  default     = "AZFW_VNet"
+
 }
 
 // Spoke Variables 
 
 variable "resourcegroup_spokename2" {
-    type = string
-    description = "spoke2 resource group name"
-    default = "SPOKE2-resource-group"
-  
+  type        = string
+  description = "spoke2 resource group name"
+  default     = "SPOKE2-resource-group"
+
 }
 
 variable "vnet_name_spoke2" {
-    type = string
-    description = " spoke2 virtual network name"
-    default = "SPOKE2-vnet"
+  type        = string
+  description = " spoke2 virtual network name"
+  default     = "SPOKE2-vnet"
 }
 
 variable "spoke2_address_space" {
- //   type = list(string)
-    description = "spoke2 vnet cidr for spoke2"
-    default = "10.2.0.0/16"
+  //   type = list(string)
+  description = "spoke2 vnet cidr for spoke2"
+  default     = "10.2.0.0/16"
 
 }
 
-variable "counter"  {
-    type = string
-    description = "spoke2 vnet cidr for spoke2"
-    default = "2"
+variable "counter" {
+  type        = string
+  description = "spoke2 vnet cidr for spoke2"
+  default     = "2"
 
 }
 
 variable "spoke2_subnet1_name" {
-    type = list
-    description = "subnet name"
-    default = [
-        {ip = "10.2.16.0/24" 
-         name = "spoke2-subnet1"},
-        {ip = "10.2.0.0/20"
-         name = "spoke2-subnet2"}
-         ] 
+  type        = list(any)
+  description = "subnet name"
+  default = [
+    { ip = "10.2.16.0/24"
+    name = "spoke2-subnet1" },
+    { ip = "10.2.0.0/20"
+    name = "spoke2-subnet2" }
+  ]
 }
 
 /*
@@ -207,7 +207,7 @@ variable "subnet2_prefix_spoke2" {
 */
 
 variable "spoke2_route_table_name" {
-    type = string
-    description = "route table for spoke2"
-    default = "spoke2-route-table"
+  type        = string
+  description = "route table for spoke2"
+  default     = "spoke2-route-table"
 }
