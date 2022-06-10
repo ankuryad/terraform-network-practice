@@ -88,7 +88,7 @@ resource "azurerm_subnet" "spoke2_subnet1" {
 
 
 
-/* - dummy code
+/* 
 resource "azurerm_subnet" "spoke2_subnet1" {
     name                 = var.spoke2_subnet1_name
     resource_group_name  = azurerm_resource_group.rgs2.name
@@ -123,7 +123,7 @@ data "azurerm_firewall" "firewall_data" {
   depends_on = [time_sleep.wait_for_azfirewall]
 }
 
-/* dummy code
+/* 
 
 output "firewall_private_ip" {
  // value = data.azurerm_firewall.firewall_data.hub_firewall.ip_configuration[0].private_ip_address
@@ -172,7 +172,7 @@ resource "azurerm_subnet_route_table_association" "subnet_route_map2" {
 
 */
 
-/* dummy code
+/* 
 
 resource "azurerm_subnet_route_table_association" "subnet_route_map1" {
   subnet_id      = azurerm_subnet.spoke2_subnet1.id
