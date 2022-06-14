@@ -11,6 +11,41 @@ variable "resourcegroup_name" {
 
 }
 
+/*
+
+variable "resouregroup_name_storage" {
+  type        = string
+  description = "Resource Group name for storage"
+  default     = "tfstate"
+}
+
+variable "storage_tier" {
+  type        = string
+  description = "Tier for storage"
+  default     = "Standard"
+
+}
+
+variable "st_account_replication_type" {
+  type        = string
+  description = "Replcation type for storage"
+  default     = "LRS"
+
+}
+
+variable "st_container_name" {
+  type        = string
+  description = "Resource Group name for container"
+  default     = "tfstate"
+}
+
+variable "st_container_access_type" {
+  type        = string
+  description = "Resource Group name for container"
+  default     = "blob"
+}
+
+*/
 
 /*
 variable "resourcegroup_name" {
@@ -87,6 +122,21 @@ variable "sku_name" {
 
 }
 
+variable "hub_vnet_prefix" {
+  type        = string
+  description = "spoke2 vnet cidr for spoke2"
+  default     = "10.0.0.0/16"
+
+}
+
+
+variable "firewall_subnet_prefix" {
+  //   type = list(string)
+  description = "firewallsubnet prefix"
+  default     = "10.0.0.0/26"
+
+}
+
 // Spoke Variables 
 
 variable "resourcegroup_spokename2" {
@@ -126,6 +176,29 @@ variable "spoke2_subnet1_name" {
     name = "spoke2-subnet2" }
   ]
 }
+
+
+variable "route-hub-name" {
+  type        = string
+  description = " spoke2 virtual network name"
+  default     = "route-hub-1"
+
+}
+
+variable "next_hop_type-name" {
+  type        = string
+  description = "next hop type"
+  default     = "VirtualAppliance"
+
+}
+
+variable "next-hop-type-address-prefix" {
+  type        = string
+  description = "next hop type address prefix"
+  default     = "0.0.0.0/0"
+
+}
+
 
 /*
 variable "spoke2_subnet1_name" {

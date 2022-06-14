@@ -2,6 +2,50 @@ provider "azurerm" {
   features {}
 }
 
+
+//Storage for state file
+
+/*
+
+resource "random_string" "resource_code" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
+
+
+resource "azurerm_resource_group" "tfstate" {
+  name     = var.resouregroup_name_storage
+  location = var.location
+}
+
+resource "azurerm_storage_account" "tfstate" {
+ // name                     = "${azurerm_resource_group.tfstate.name}${random_string.resource_code.result}"
+  name = "mystorage-ank"
+  resource_group_name      = azurerm_resource_group.tfstate.name
+  location                 = azurerm_resource_group.tfstate.location
+  account_tier             = var.storage_tier
+  account_replication_type = var.st_account_replication_type
+  //allow_blob_public_access = true
+
+  tags = {
+    environment = var.env
+  }
+}
+
+resource "azurerm_storage_container" "tfstate" {
+  name                  = var.st_container_name
+  storage_account_name  = azurerm_storage_account.tfstate.name
+  container_access_type = var.st_container_access_type
+}
+
+
+*/
+
+
+//HUB
+
 resource "azurerm_resource_group" "rg" {
   name     = var.resourcegroup_name
   location = var.location
@@ -19,7 +63,9 @@ resource "azurerm_virtual_network" "hub_vnet" {
   name                = var.vnet_name
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  address_space       = ["10.0.0.0/16"]
+  // address_space       = ["10.0.0.0/16"]
+  address_space = [var.hub_vnet_prefix]
+
   tags = {
     environment = var.env
   }
@@ -30,7 +76,8 @@ resource "azurerm_subnet" "firewall_subnet" {
   name                 = var.subnet_name
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.hub_vnet.name
-  address_prefixes     = ["10.0.0.0/26"]
+  //address_prefixes     = ["10.0.0.0/26"]
+  address_prefixes = [var.firewall_subnet_prefix]
 }
 
 resource "azurerm_public_ip" "firewall_ip" {
@@ -109,7 +156,7 @@ resource "azurerm_subnet" "spoke2_subnet2" {
 
 
 resource "time_sleep" "wait_for_azfirewall" {
-  create_duration = "300s"
+  create_duration = "60s"
 
   depends_on = [azurerm_firewall.Hub_firewall]
 }
@@ -141,11 +188,12 @@ resource "azurerm_route_table" "spoke2_route_table" {
   resource_group_name = azurerm_resource_group.rgs2.name
 
   route {
-    name = "route-hub"
+    name = var.route-hub-name
     //  next_hop_in_ip_address = data.azurerm_firewall.firewall_data.outputs.firewall_private_ip
     //  address_prefix = "10.0.0.0/16"
-    address_prefix         = "0.0.0.0/0"
-    next_hop_type          = "VirtualAppliance"
+    //address_prefix         = "0.0.0.0/0"
+    address_prefix         = var.next-hop-type-address-prefix
+    next_hop_type          = var.next_hop_type-name
     next_hop_in_ip_address = data.azurerm_firewall.firewall_data.ip_configuration[0].private_ip_address
   }
 
