@@ -2,7 +2,7 @@
 variable "resouregroup_name_storage" {
   type        = string
   description = "Resource Group name for storage"
-  default     = "tfstate"
+  default     = "tfstate1"
 }
 
 variable "storage_tier" {
@@ -29,7 +29,7 @@ variable "st_account_replication_type" {
 variable "st_container_name" {
   type        = string
   description = "Resource Group name for container"
-  default     = "tfstate"
+  default     = "tfstate1"
 }
 
 variable "st_container_access_type" {
