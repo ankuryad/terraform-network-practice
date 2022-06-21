@@ -32,7 +32,7 @@ steps:
     commandOptions: '-out=main.tfplan'
 
 
-- task: TerraformTaskV1@9
+- task: TerraformTaskV1@0
   displayName: terraform apply main.tfplan
   inputs:
     provider: 'azurerm'
