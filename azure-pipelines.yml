@@ -12,19 +12,19 @@ pool:
 steps:
 
 
-- task: TerraformInstaller
+- task: TerraformInstaller@0
   displayName: Install Terraform v1.2.3
   inputs:
     terraformversion: '1.2.3'
 
-- task: TerraformTaskV1
+- task: TerraformTaskV1@1
   displayName: terraform init
   inputs:
     provider: 'azurerm'
     command: 'init'
     
 
-- task: TerraformTaskV1
+- task: TerraformTaskV1@2
   displayName: terraofrm plan -out=main.tfplan
   inputs:
     provider: 'azurerm'
@@ -32,7 +32,7 @@ steps:
     commandOptions: '-out=main.tfplan'
 
 
-- task: TerraformTaskV1
+- task: TerraformTaskV1@3
   displayName: terraform apply main.tfplan
   inputs:
     provider: 'azurerm'
