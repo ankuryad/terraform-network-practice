@@ -10,11 +10,21 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+<<<<<<< HEAD
 - task: TerraformInstaller
   displayName: Install Terraform latest
   inputs:
     terraformversion: 'latest'
 
+=======
+
+
+- task: TerraformInstaller
+  displayName: Install Terraform latest
+  inputs:
+    terraformversion: 'latest'
+
+>>>>>>> 1b197c5ea43acbf79755aac0d83562584b3cc480
 - task: TerraformTaskV1
   displayName: terraform init
   inputs:
@@ -36,4 +46,9 @@ steps:
     provider: 'azurerm'
     command: 'apply'
     commandOptions: main.tfplan
+<<<<<<< HEAD
     
+=======
+    
+
+>>>>>>> 1b197c5ea43acbf79755aac0d83562584b3cc480
