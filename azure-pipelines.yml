@@ -25,7 +25,7 @@ steps:
     
 
 - task: TerraformTaskV1
-  displayName: terraofrm plam -out=main.tfplan
+  displayName: terraofrm plan -out=main.tfplan
   inputs:
     provider: 'azurerm'
     command: plan
