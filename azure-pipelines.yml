@@ -31,11 +31,12 @@ steps:
     command: plan
     commandOptions: '-out=main.tfplan'
 
--task: TerraformTaskV1@0
- displayName: terraform apply main.tfplan
- inputs:
-   provider: 'azurerm'
-   command: 'apply'
-   commandOptions: main.tfplan
+
+- task: TerraformTaskV1@0
+  displayName: terraform apply main.tfplan
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    commandOptions: main.tfplan
     
 
