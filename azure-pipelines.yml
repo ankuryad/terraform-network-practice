@@ -55,3 +55,4 @@ steps:
     command: 'apply'
     commandOptions: main.tfplan
     workingDirectory: '$(System.DefaultWorkingDirectory)'
+    environmentServiceNameAzureRM: '$(subscription)'
