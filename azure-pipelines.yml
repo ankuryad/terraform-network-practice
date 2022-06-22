@@ -22,6 +22,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)
     
 
 - task: TerraformTaskV1@0
@@ -30,6 +31,7 @@ steps:
     provider: 'azurerm'
     command: plan
     commandOptions: '-out=main.tfplan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)
 
 
 - task: TerraformTaskV1@0
@@ -38,3 +40,4 @@ steps:
     provider: 'azurerm'
     command: 'apply'
     commandOptions: main.tfplan
+    workingDirectory: '$(System.DefaultWorkingDirectory)
