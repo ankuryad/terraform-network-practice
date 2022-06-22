@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
   
 variables:
-  subscription: 2b92932e-3da0-41ca-8476-e42d538c0dc6
+  subscription: Azure subscription 1
   resourceGroup: tfstate1
   storageAccount: mystorageank5647
   container: tfstate1
