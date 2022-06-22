@@ -43,7 +43,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: plan
-    commandOptions: '-out=main.tfplan -lock=false'
+    commandOptions: '-out=main.tfplan'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     environmentServiceNameAzureRM: '$(subscription)'
 
@@ -53,6 +53,6 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'apply'
-    commandOptions: 'main.tfplan -lock=false'
+    commandOptions: 'main.tfplan'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     environmentServiceNameAzureRM: '$(subscription)'
