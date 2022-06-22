@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
   
 variables:
-  subscription: ankur-terra-conn
+  subscription: ankuryad
   resourceGroup: tfstate1
   storageAccount: mystorageank5647
   container: tfstate1
