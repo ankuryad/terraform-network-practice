@@ -45,6 +45,7 @@ steps:
     command: plan
     commandOptions: '-out=main.tfplan'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
+    environmentServiceNameAzureRM: '$(subscription)'
 
 
 - task: TerraformTaskV1@2
