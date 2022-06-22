@@ -19,7 +19,7 @@ variables:
 steps:
 
 
-- task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+- task: TerraformInstaller@0
   displayName: Install Terraform latest
   inputs:
     terraformVersion: '1.2.3'
