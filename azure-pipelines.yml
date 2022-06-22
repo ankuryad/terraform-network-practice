@@ -29,7 +29,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    commandOptions: 'reconfigure'
+    commandOptions: '-reconfigure'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     backendServiceArm: '$(subscription)'
     backendAzureRmResourceGroupName: '$(resourceGroup)'
